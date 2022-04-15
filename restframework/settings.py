@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-
+from decouple import config
+from dj_database_url import parse as dburl
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,14 +24,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a$a8xj(1liqw2zwa-c!j3vq!)y8wx3$#@80fkxl*-!=vqe*=82'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = ['elibrary104.herokuapp.com']
+ALLOWED_HOSTS = ['e-library104.herokuapp.com']
 
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Application definition
 
@@ -45,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'suggestion'
+    'suggestion',
 ]
 
 MIDDLEWARE = [
@@ -88,12 +87,7 @@ WSGI_APPLICATION = 'restframework.wsgi.application'
 
 
 default_dburl = 'sqlite:///'+ os.path.join(BASE_DIR, 'db.sqlite3')
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dburl),}
 
 CORS_ORIGIN_ALLOW_ALL = True
 
