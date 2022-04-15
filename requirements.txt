@@ -50,3 +50,4 @@ virtualenv==20.10.0
 waitress==2.1.1
 wcwidth==0.2.5
 whitenoise==6.0.0
+psycopg2
