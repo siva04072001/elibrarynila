@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-a$a8xj(1liqw2zwa-c!j3vq!)y8wx3$#@80fkxl*-!=vqe*=82
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['elibrary104.herokuapp.com']
 
 
 # Application definition
@@ -60,6 +60,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
 ROOT_URLCONF = 'restframework.urls'
 
 TEMPLATES = [
@@ -84,6 +86,8 @@ WSGI_APPLICATION = 'restframework.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+default_dburl = 'sqlite:///'+ os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
