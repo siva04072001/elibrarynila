@@ -1,1 +1,4 @@
-web: gunicorn restframework.wsgi --log-file -
+web: gunicorn restframework.wsgi 
+release: python manage.py makemigrations --noinput
+release: python manage.py collectstatic --noinput
+release: python manage.py migrate --noinput

@@ -12,10 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
-from dj_database_url import parse as dburl
+import django_heroku
 
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
@@ -26,10 +25,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 
 
-ALLOWED_HOSTS = ['e-library104.herokuapp.com']
+ALLOWED_HOSTS = ["*"]
 
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Application definition
 
@@ -87,7 +84,16 @@ WSGI_APPLICATION = 'restframework.wsgi.application'
 
 
 default_dburl = 'sqlite:///'+ os.path.join(BASE_DIR, 'db.sqlite3')
-DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dburl),}
+DATABASES = { 
+    'default':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    } 
+}
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -137,3 +143,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     )
 }
+django_heroku.settings(locals())
