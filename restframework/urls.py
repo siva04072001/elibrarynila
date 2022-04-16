@@ -20,7 +20,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from django.conf import  settings
 from django.conf.urls.static import static
 from django.views.static import serve
-from django.conf.urls import url
+
 from book import views
 from book.views import BookViewset
 
@@ -31,8 +31,8 @@ urlpatterns = [
     path('book/',include('book.urls')),
     path('suggest/', include('suggestion.urls')),
     path('SaveFile',views.BookViewset.SaveFile),
-    url(r'^media/(?P<path>.*)$', serve,{'document_root':  settings.MEDIA_ROOT}), 
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+    path(r'^media/(?P<path>.*)$', serve,{'document_root':  settings.MEDIA_ROOT}), 
+    path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
 
 if settings.DEBUG:
