@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -142,4 +142,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     )
 }
-django_heroku.settings(locals())
