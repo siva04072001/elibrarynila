@@ -82,8 +82,6 @@ WSGI_APPLICATION = 'restframework.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-
-default_dburl = 'sqlite:///'+ os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = { 
     'default':{
         'ENGINE': 'django.db.backends.sqlite3',
@@ -134,6 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_ROOT = os.path.join('BASE_DIR', 'staticfiles')
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
